@@ -1,8 +1,21 @@
 * {
-  font-family: 'Poiret One', cursive;
+  font-family: 'Special Elite', cursive;
   background-color:#0abab5;
 }
 
 body {
+
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
+}
+
+.introWrapper {
 
 }

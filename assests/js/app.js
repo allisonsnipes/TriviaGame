@@ -18,6 +18,7 @@ let questions = [
     },
     correctAnswer: "Norway",
   },
+
   {
       question: "In this year alone, what percentage of women journalists receive harassment for the stories they cover?",
       answers: {
@@ -28,6 +29,7 @@ let questions = [
       },
       correctAnswer: "2/3",
   },
+
   {
       question: "To date, which country has the world’s worst ranking of press freedom?",
       answers: {
@@ -38,6 +40,7 @@ let questions = [
       },
       correctAnswer: "North Korea",
   },
+
   {
       question: "What is the ranking of the United States on the 2018 World Press Freedom Index?",
       answers: {
@@ -48,6 +51,7 @@ let questions = [
       },
       correctAnswer: "40",
   },
+
   {
       question: "What is Russia’s ranking on the 2018 World Press Freedom Index?",
       answers: {
@@ -58,6 +62,7 @@ let questions = [
       },
       correctAnswer: "148",
   },
+
   {
       question: "Cyberbullying and/or online bullying is not an infringement on journalists’ freedom.",
       answers: {
@@ -68,6 +73,7 @@ let questions = [
       },
       correctAnswer: "The right to communicate online freely, without barriers, is a fundamental right to everyone: including the press.",
   },
+
   {
       question: "Which is not an online attack method on journalists that authoritarian regimes in an attempt to silence journalists.",
       answers: {
@@ -78,6 +84,7 @@ let questions = [
       },
       correctAnswer: "All of the above are forms of attacks on journalists.",
   },
+
   {
       question: "Press suppression is a third world and/or less developed country’s problem.",
       answers: {
@@ -88,6 +95,7 @@ let questions = [
       },
       correctAnswer: "False, it concerns countries from both developed and less developed democracies and governments.",
   },
+
   {
       question: "This year alone, what percentage of women journalists were harassed offline?",
       answers: {
@@ -110,3 +118,9 @@ let questions = [
       correctAnswer: "No, social media platforms often use imbalanced moderation policies via artificial intelligence that do not allow activists and journals to appeal of removal of their content",
   },
 ];
+
+//code here for timer
+
+//code here for if/else wrong answer
+
+//functions for starting the game
