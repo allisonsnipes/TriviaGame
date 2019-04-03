@@ -1,7 +1,8 @@
 //better than document ready function event fires when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
-  document.getElementsByClassName("quiz").hide();
+  quiz").hide();
+  document.getElementsByClassName("nextButton").hide();
 
 });
 
@@ -137,5 +138,5 @@ function myTimer() {
 //functions for starting the game
 document.getElementsByClassName("nextButton").onclick = function(event) {
   event.preventDefault();
-  
-});
+
+};

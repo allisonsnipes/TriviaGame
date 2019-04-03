@@ -23,3 +23,7 @@ background-color: #0abab5;
 .introWrapper {
   margin-top: 5em;
 }
+
+.hide {
+  display: none;
+}
