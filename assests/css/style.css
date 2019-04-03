@@ -4,7 +4,7 @@
 }
 
 body {
-
+background-color: #0abab5;
 }
 
 .fullWidth {
@@ -16,6 +16,10 @@ body {
   text-align: center;
 }
 
-.introWrapper {
+.top {
+  margin-top: 3em;
+}
 
+.introWrapper {
+  margin-top: 5em;
 }

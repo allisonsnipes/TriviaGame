@@ -1,6 +1,7 @@
 //better than document ready function event fires when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
+  document.getElementsByClassName("quiz").hide();
 
 });
 
@@ -118,9 +119,23 @@ let questions = [
       correctAnswer: "No, social media platforms often use imbalanced moderation policies via artificial intelligence that do not allow activists and journals to appeal of removal of their content",
   },
 ];
+//set the number counter to 30
+let number = 30;
+//holds the interval ID when we start the run function
+let intervalId;
 
 //code here for timer
+let quizTimer = setInterval(myTimer, 1000);
 
+function myTimer() {
+
+
+
+}
 //code here for if/else wrong answer
 
 //functions for starting the game
+document.getElementsByClassName("nextButton").onclick = function(event) {
+  event.preventDefault();
+  
+});

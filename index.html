@@ -17,27 +17,37 @@
 </head>
 <body>
   <!-- navigation bar -->
-  <nav class="navbar fullWidth" role="navigation">
+  <nav class="navbar fullWidth top" role="navigation">
     <div class="center">
       Trivia: Journalist and Activist Rights!
     </div>
   </nav>
 
-  <!-- container for trivia questions -->
   <div class="container">
+    <!-- row for trivia intro -->
     <div class="row">
-      <div class="center col-12">
-        <div class="introWrapper">
-            A brief overview on press freedom and activists rights worldwide. This is to test your general knowledge of the plight of the press, activists' barriers to freedom of speech, and various governments'
-            tactics to block access to information.
-            <br>
-            Click the START button to begin the quiz
+      <div class="center col-12 introWrapper">
+        A trivia game on press freedom and activists rights worldwide. Test your knowledge of governments limitation freedom of speech worldwide, the tactics used to block access to information, and activists' rights.
+        <br>
+        <br>
+        Click the START button to begin the quiz!
+      </div>
+      <button class="startButton" id="startQuiz" type="submit">Start</button>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div class="quiz" id="quizWrapper">
+          <form class="showQuiz">
+            <fieldset class="quizQuestions">
+              <button class="nextButton" id="nextButton" type="submit">Next Question
+              </button>
+            </fieldset>
+          </form>
         </div>
-        <button class="startButton" id="startQuiz" type="submit">Start</button>
       </div>
     </div>
 
-    <
 
 
 
@@ -50,5 +60,5 @@
 
 </body>
 <!-- code for js component -->
-<script src="../5hw/assests/js/app.js"></script>
+<script src="assests/js/app.js"></script>
 </html>
