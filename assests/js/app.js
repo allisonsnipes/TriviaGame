@@ -1,7 +1,6 @@
 //better than document ready function event fires when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
-  nextQuestion();
 
 });
 
@@ -127,14 +126,18 @@ var introWrapper = document.getElementById("intro");
 var displayQs = document.getElementById("questionsQ");
 
 $("nextButton").on("click", () => nextQuestion());
-
+const choiceLetter = $(`input[name='quizchoices']:checked`).val();
+const wrongAnswerText = `I'm sorry, that was the incorrect answer. The correct answer is: ${questions[currentQuestion].correctAnswer}`;
+const rightAnswerText = "Good job! Right answer.";
 
 //functions for initialized buttons etc
 var start = () => {
   if (introWrapper.style.display == 'none') {
     introWrapper.style.display = 'block';
+    finishedSection.style.display = 'none';
   } else {
     introWrapper.style.display = 'none';
+    finishedSection.style.display = 'none';
     nextQuestion();
   }
 };
@@ -142,7 +145,39 @@ var start = () => {
   // dislpays quiz questions for next question clicked
 var nextQuestion = () => {
   console.log("display questions");
-  $(".quizQuestions").html(`
+  if ((currentQuestion + 1) === questions.length) { //stop quiz @ last question
+    finishedSection.style.display = 'block';
+    introWrapper.style.display = 'none';
+    questionsQ.style.display = 'none';
+
+    if (choiceLetter === questions[currentQuestion].correctAnswer) {// show next question if right answer
+       $(".rightFeebackPart").text(rightAnswerText).show();
+       $(".wrongFeebackPart").hide();
+       score++;
+      } else{
+        $(".wrongFeebackPart").show().text(wrongAnswerText);//code to let the user know they did not get the correct answer, and provide the correct answer
+          $(".rightFeebackPart").hide();
+      }
+      calculatePercentage("You're final score is: ");//informs the user of their final score
+      resetQuiz();
+      exitQuiz();
+  } else { //if else statement for the user to continue the quiz until the reach the last question
+      if (choiceLetter === questions[currentQuestion].correctAnswer) {
+          $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
+          $(".wrongFeebackPart").hide();
+          score++;//increase the users' score if the get the question right
+          currentQuestion++;//show the next question if the user gets the previous question correct
+      } else if ($(`input[name='quizchoices']:checked`).length <= 0) {//prevents the user from skipping the question without providing an answer choice
+          alert ("Please make an answer selection.");//displays an error message to let the user know they have to select an answer before moving on
+      } else {
+          $(".wrongFeebackPart").show().text(wrongAnswerText);//informs the user that they selected the wrong answer and shows the correct answer instead
+          $(".rightFeebackPart").hide();
+          currentQuestion++;//moves on to the next question
+      }
+}
+
+//function to generate question
+$(".quizQuestions").html(`
     <legend>
         ${questions[currentQuestion].question}
     </legend>
@@ -162,8 +197,8 @@ var nextQuestion = () => {
         <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
         <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
     </div>
+    <button class="nextButton" id="nextButton" type="submit">Next Question </button>
   `);
-}
 
 //set the number counter to 30
 let number = 30;
@@ -177,9 +212,3 @@ function myTimer() {
 
 }
 //code here for if/else wrong answer
-
-//functions for starting the game
-// document.getElementsByClassName("nextButton").onclick = function(event) {
-//   event.preventDefault();
-
-// };
