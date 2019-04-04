@@ -27,3 +27,7 @@ background-color: #0abab5;
 .hide {
   display: none;
 }
+
+#questions[currentQuestion].answers:checked {
+  border: 20px solid black;
+}

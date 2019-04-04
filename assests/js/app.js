@@ -1,8 +1,7 @@
 //better than document ready function event fires when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
-  quiz").hide();
-  document.getElementsByClassName("nextButton").hide();
+  nextQuestion();
 
 });
 
@@ -120,6 +119,52 @@ let questions = [
       correctAnswer: "No, social media platforms often use imbalanced moderation policies via artificial intelligence that do not allow activists and journals to appeal of removal of their content",
   },
 ];
+
+
+//initializing buttons for hide functions for start button/ next button
+$("#startQuiz").on("click", () => start());
+var introWrapper = document.getElementById("intro");
+var displayQs = document.getElementById("questionsQ");
+
+$("nextButton").on("click", () => nextQuestion());
+
+
+//functions for initialized buttons etc
+var start = () => {
+  if (introWrapper.style.display == 'none') {
+    introWrapper.style.display = 'block';
+  } else {
+    introWrapper.style.display = 'none';
+    nextQuestion();
+  }
+};
+
+  // dislpays quiz questions for next question clicked
+var nextQuestion = () => {
+  console.log("display questions");
+  $(".quizQuestions").html(`
+    <legend>
+        ${questions[currentQuestion].question}
+    </legend>
+    <div>
+        <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
+        <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
+    </div>
+    <div>
+        <input id="${questions[currentQuestion].answers.b}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.b}">
+        <label for="${questions[currentQuestion].answers.b}"> ${questions[currentQuestion].answers.b}</label>
+    </div>
+    <div>
+        <input id="${questions[currentQuestion].answers.c}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.c}">
+        <label for="${questions[currentQuestion].answers.c}"> ${questions[currentQuestion].answers.c}</label>
+    </div>
+    <div>
+        <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
+        <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
+    </div>
+  `);
+}
+
 //set the number counter to 30
 let number = 30;
 //holds the interval ID when we start the run function
@@ -130,13 +175,11 @@ let quizTimer = setInterval(myTimer, 1000);
 
 function myTimer() {
 
-
-
 }
 //code here for if/else wrong answer
 
 //functions for starting the game
-document.getElementsByClassName("nextButton").onclick = function(event) {
-  event.preventDefault();
+// document.getElementsByClassName("nextButton").onclick = function(event) {
+//   event.preventDefault();
 
-};
+// };
