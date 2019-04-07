@@ -137,7 +137,7 @@ function startQuiz() {
     $(".finishedQuiz").hide();
     $(".introWrapper").hide();
   });
-
+  questionDisplay();
 }
 
 function questionDisplay() { //generate questions
