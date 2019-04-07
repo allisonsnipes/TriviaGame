@@ -134,13 +134,14 @@ function startQuiz() {
     console.log("start is working");
     $(".quizWrapper").show();
     $(".feedbackPartSelection").show();
+    $(".quizLocation").html(`You are on question: ${currentQuestion +1}`).show();
     $(".finishedQuiz").hide();
     $(".introWrapper").hide();
   });
-  questionDisplay();
+  generateQuestions();
 }
 
-function questionDisplay() { //generate questions
+function generateQuestions() { //generate questions
   $(".quizQuestions").html(`
     <legend>
       ${questions[currentQuestion].question}
@@ -166,6 +167,10 @@ function questionDisplay() { //generate questions
       <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
     </div>
   `);
+}
+
+function comparingAnswersAndProgresson() {
+
 }
 
 // var timer
