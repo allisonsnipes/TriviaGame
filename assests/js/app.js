@@ -1,6 +1,7 @@
 //better than document ready function event fires when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
+  startQuiz();
 
 });
 
@@ -124,105 +125,46 @@ var questions = [
   },
 ];
 
-
 //initializing buttons for hide functions for start button/ next button
-$(".startButton").on("click", () => start());
+function startQuiz() {
+  $(".startButton").on("click", function(event) {
+    console.log("start is working");
+    event.preventDefault();
+    $(".introWrapper").hide();
+    $(".quizWrapper").show();
 
-//startButton function for initialized buttons etc
-let start = () => {
-  $(".quiz").show();
-  if (introWrapper.style.display == 'none') {
-    introWrapper.style.display = 'block';
-    finishedSection.style.display = 'none';
-  } else {
-    introWrapper.style.display = 'none';
-    finishedSection.style.display = 'none';
-    nextQuestion();
-  }
-};
-
-//initializing quiz progress
-$(".nextButton").on("click", () => nextQuestion());
-
-// dislpays quiz questions for next question clicked
-var nextQuestion = () => {
-  console.log("display questions");
-  if ((currentQuestion + 1) === questions.length) { //stop quiz @ last question
-    finishedSection.style.display = 'block';
-    introWrapper.style.display = 'none';
-    questionsQ.style.display = 'none';
-
-    $(".nextButton").on("click", function(event) {
-      event.preventDefault();
-      const choiceLetter = $(`input[name='quizchoices']:checked`).val();
-      const wrongAnswerText = `I'm sorry, that was the incorrect answer. The correct answer is: ${questions[currentQuestion].correctAnswer}`;
-      const rightAnswerText = "Good job! Right answer.";
-
-      if ((currentQuestion + 1) === questions.length) { //if the user gets to the last question stop the quiz
-          $(".finishedQuiz").show();
-          $(".wrapper").hide();
-          $(".quiz").hide();
-
-          if (choiceLetter === questions[currentQuestion].correctAnswer) {//code to generate next question if the user provides right answer
-              $(".rightFeebackPart").text(rightAnswerText).show();
-              $(".wrongFeebackPart").hide();
-              score++;
-          } else{
-              $(".wrongFeebackPart").show().text(wrongAnswerText);//code to let the user know they did not get the correct answer, and provide the correct answer
-              $(".rightFeebackPart").hide();
-          }
-          calculatePercentage("You're final score is: ");//informs the user of their final score
-          resetQuiz();
-          exitQuiz();
-      } else { //if else statement for the user to continue the quiz until the reach the last question
-          if (choiceLetter === questions[currentQuestion].correctAnswer) {
-              $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
-              $(".wrongFeebackPart").hide();
-              score++;//increase the users' score if the get the question right
-              currentQuestion++;//show the next question if the user gets the previous question correct
-          } else if ($(`input[name='quizchoices']:checked`).length <= 0) {//prevents the user from skipping the question without providing an answer choice
-              alert ("Please make an answer selection.");//displays an error message to let the user know they have to select an answer before moving on
-          } else {
-              $(".wrongFeebackPart").show().text(wrongAnswerText);//informs the user that they selected the wrong answer and shows the correct answer instead
-              $(".rightFeebackPart").hide();
-              currentQuestion++;//moves on to the next question
-          }
-          calculatePercentage("You're current score is: ");//informs the user of their current score
-          $(".quizLocation").html(`You're on question: ${currentQuestion}`);//informs the user of their location in the quiz
-          questionDisplay();
-          generateQuestion();
-      }
   });
 }
+
 
 // var timer
 
 //function to generate question
-function generateQuestion() {
-  $(".quizQuestions").html(`
-    <legend>
-      ${questions[currentQuestion].question}
-    </legend>
+// function generateQuestion() {
+//   $(".quizQuestions").html(`
+//     <legend>
+//       ${questions[currentQuestion].question}
+//     </legend>
 
-    <div>
-      <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
-      <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
-    </div>
+//     <div>
+//       <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
+//       <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
+//     </div>
 
-    <div>
-      <input id="${questions[currentQuestion].answers.b}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.b}">
-      <label for="${questions[currentQuestion].answers.b}"> ${questions[currentQuestion].answers.b}</label>
-    </div>
+//     <div>
+//       <input id="${questions[currentQuestion].answers.b}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.b}">
+//       <label for="${questions[currentQuestion].answers.b}"> ${questions[currentQuestion].answers.b}</label>
+//     </div>
 
-    <div>
-      <input id="${questions[currentQuestion].answers.c}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.c}">
-      <label for="${questions[currentQuestion].answers.c}"> ${questions[currentQuestion].answers.c}</label>
-    </div>
+//     <div>
+//       <input id="${questions[currentQuestion].answers.c}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.c}">
+//       <label for="${questions[currentQuestion].answers.c}"> ${questions[currentQuestion].answers.c}</label>
+//     </div>
 
-    <div>
-      <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
-      <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
-    </div>
-    <button class="nextButton" id="nextButton" type="submit">Next Question </button>
-  `);
-}
+//     <div>
+//       <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
+//       <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
+//     </div>
+//     <button class="nextButton" id="nextButton" type="submit">Next Question </button>
+//   `);
+// }

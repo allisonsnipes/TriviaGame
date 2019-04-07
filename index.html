@@ -25,27 +25,31 @@
 
   <div class="container">
     <!-- row for trivia intro -->
-    <div class="row">
-      <div class="center col-12 introWrapper" id="intro">
-        A trivia game on press freedom and activists rights worldwide. Test your knowledge of governments limitation freedom of speech worldwide, the tactics used to block access to information, and activists' rights.
-        <br>
-        <br>
-        Click the START button to begin the quiz!
-        <br>
-        <br>
+    <div class="introWrapper">
+      <div class="row">
+        <div class="center col-12" id="intro">
+          A trivia game on press freedom and activists rights worldwide. Test your knowledge of governments limitation freedom of speech worldwide, the tactics used to block access to information, and activists' rights.
+          <br>
+          <br>
+          Click the START button to begin the quiz!
+          <br>
+          <br>
+        </div>
+        <button class="startButton center" id="startQuiz" type="submit">Start</button>
       </div>
-      <button class="startButton center" id="startQuiz" type="submit">Start</button>
     </div>
 
-    <div class="row">
-      <div class="col-6">
-        <div class="quiz" id="quizWrapper">
-          <form class="showQuiz" id="questionsQ">
-            <fieldset class="quizQuestions">
-              <button class="nextButton" id="nextButton" type="submit">Next Question
-              </button>
-            </fieldset>
-          </form>
+    <div class="quizWrapper">
+      <div class="row">
+        <div class="col-6">
+          <div class="quiz">
+            <form class="showQuiz" id="questionsQ">
+              <fieldset class="quizQuestions">
+                <button class="nextButton" id="nextButton" type="submit">Next Question
+                </button>
+              </fieldset>
+            </form>
+          </div>
         </div>
       </div>
     </div>
