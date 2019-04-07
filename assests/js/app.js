@@ -5,9 +5,16 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // global variables
-let currentQuestion = 0;
-let score = 0;
-let questions = [
+var currentQuestion = 0;
+var score = 0;
+var timer = 30;//set the number counter to 30
+var timerOn = false; //default to have the time on off
+var introWrapper = document.getElementById("intro"); //introduction wrapepr
+var displayQs = document.getElementById("questionsQ"); //quiz wrapper
+const choiceLetter = $(`input[name='quizchoices']:checked`).val();
+const wrongAnswerText = `I'm sorry, that was the incorrect answer. The correct answer is: ${questions[currentQuestion].correctAnswer}`;
+const rightAnswerText = "Good job! Right answer.";
+var questions = [
   {
     question: "Which country ranks number one in press freedom?",
     answers: {
@@ -122,16 +129,13 @@ let questions = [
 
 //initializing buttons for hide functions for start button/ next button
 $("#startQuiz").on("click", () => start());
-var introWrapper = document.getElementById("intro");
-var displayQs = document.getElementById("questionsQ");
 
+//initializing quiz progress
 $("nextButton").on("click", () => nextQuestion());
-const choiceLetter = $(`input[name='quizchoices']:checked`).val();
-const wrongAnswerText = `I'm sorry, that was the incorrect answer. The correct answer is: ${questions[currentQuestion].correctAnswer}`;
-const rightAnswerText = "Good job! Right answer.";
 
 //functions for initialized buttons etc
 var start = () => {
+  $("#questionsQ").show();
   if (introWrapper.style.display == 'none') {
     introWrapper.style.display = 'block';
     finishedSection.style.display = 'none';
@@ -142,7 +146,8 @@ var start = () => {
   }
 };
 
-  // dislpays quiz questions for next question clicked
+var timer
+// dislpays quiz questions for next question clicked
 var nextQuestion = () => {
   console.log("display questions");
   if ((currentQuestion + 1) === questions.length) { //stop quiz @ last question
@@ -150,49 +155,53 @@ var nextQuestion = () => {
     introWrapper.style.display = 'none';
     questionsQ.style.display = 'none';
 
-    if (choiceLetter === questions[currentQuestion].correctAnswer) {// show next question if right answer
+    if (choiceLetter === questions[currentQuestion].correctAnswer) {//progress
        $(".rightFeebackPart").text(rightAnswerText).show();
        $(".wrongFeebackPart").hide();
        score++;
       } else{
-        $(".wrongFeebackPart").show().text(wrongAnswerText);//code to let the user know they did not get the correct answer, and provide the correct answer
+        $(".wrongFeebackPart").show().text(wrongAnswerText);//show right ans
           $(".rightFeebackPart").hide();
       }
-      calculatePercentage("You're final score is: ");//informs the user of their final score
       resetQuiz();
       exitQuiz();
-  } else { //if else statement for the user to continue the quiz until the reach the last question
-      if (choiceLetter === questions[currentQuestion].correctAnswer) {
-          $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
-          $(".wrongFeebackPart").hide();
-          score++;//increase the users' score if the get the question right
-          currentQuestion++;//show the next question if the user gets the previous question correct
-      } else if ($(`input[name='quizchoices']:checked`).length <= 0) {//prevents the user from skipping the question without providing an answer choice
-          alert ("Please make an answer selection.");//displays an error message to let the user know they have to select an answer before moving on
-      } else {
-          $(".wrongFeebackPart").show().text(wrongAnswerText);//informs the user that they selected the wrong answer and shows the correct answer instead
-          $(".rightFeebackPart").hide();
-          currentQuestion++;//moves on to the next question
-      }
+   } else { //if else statement to continue the quiz until last question
+    if (choiceLetter === questions[currentQuestion].correctAnswer) {
+      $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
+      $(".wrongFeebackPart").hide();
+      score++;//increase the users' score if the get the question right
+      currentQuestion++;//show the next question if question correct
+    } else if ($(`input[name='quizchoices']:checked`).length <= 0) {//prevents users from skipping ques
+      alert ("Please make an answer selection.");//displays an error message
+    } else {
+      $(".wrongFeebackPart").show().text(wrongAnswerText);//informs the user that they selected the wrong answer and shows the correct answer instead
+      $(".rightFeebackPart").hide();
+      currentQuestion++;//moves on to the next question
+    }
+  }
 }
 
 //function to generate question
 $(".quizQuestions").html(`
     <legend>
-        ${questions[currentQuestion].question}
+      ${questions[currentQuestion].question}
     </legend>
+
     <div>
-        <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
-        <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
+      <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
+      <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
     </div>
+
     <div>
         <input id="${questions[currentQuestion].answers.b}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.b}">
         <label for="${questions[currentQuestion].answers.b}"> ${questions[currentQuestion].answers.b}</label>
     </div>
+
     <div>
         <input id="${questions[currentQuestion].answers.c}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.c}">
         <label for="${questions[currentQuestion].answers.c}"> ${questions[currentQuestion].answers.c}</label>
     </div>
+
     <div>
         <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
         <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
@@ -200,15 +209,4 @@ $(".quizQuestions").html(`
     <button class="nextButton" id="nextButton" type="submit">Next Question </button>
   `);
 
-//set the number counter to 30
-let number = 30;
-//holds the interval ID when we start the run function
-let intervalId;
-
-//code here for timer
-let quizTimer = setInterval(myTimer, 1000);
-
-function myTimer() {
-
-}
 //code here for if/else wrong answer
