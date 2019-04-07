@@ -31,3 +31,20 @@ background-color: #0abab5;
 #questions[currentQuestion].answers:checked {
   border: 20px solid black;
 }
+
+input[type="radio"] {
+  appearance: button;
+  border: 4px solid #ccc;
+  border-top-color: #bbb;
+  border-left-color: #bbb;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+legend {
+  background-color: salmon;
+  color: #fff;
+  padding: 20px;
+}

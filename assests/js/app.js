@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
   startQuiz();
   $(".finishedQuiz").hide();
+  $(".quizWrapper").hide();
 
 });
 
@@ -129,43 +130,42 @@ var questions = [
 //initializing buttons for hide functions for start button/ next button
 function startQuiz() {
   $(".startButton").on("click", function(event) {
-    console.log("start is working");
     event.preventDefault();
-    $(".introWrapper").hide();
+    console.log("start is working");
     $(".quizWrapper").show();
+    $(".feedbackPartSelection").show();
+    $(".finishedQuiz").hide();
+    $(".introWrapper").hide();
   });
+
 }
 
-function
+function questionDisplay() { //generate questions
+  $(".quizQuestions").html(`
+    <legend>
+      ${questions[currentQuestion].question}
+    </legend>
+
+    <div>
+      <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
+      <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
+    </div>
+
+    <div>
+      <input id="${questions[currentQuestion].answers.b}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.b}">
+      <label for="${questions[currentQuestion].answers.b}"> ${questions[currentQuestion].answers.b}</label>
+    </div>
+
+    <div>
+      <input id="${questions[currentQuestion].answers.c}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.c}">
+      <label for="${questions[currentQuestion].answers.c}"> ${questions[currentQuestion].answers.c}</label>
+    </div>
+
+    <div>
+      <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
+      <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
+    </div>
+  `);
+}
 
 // var timer
-
-//function to generate question
-// function generateQuestion() {
-//   $(".quizQuestions").html(`
-//     <legend>
-//       ${questions[currentQuestion].question}
-//     </legend>
-
-//     <div>
-//       <input id="${questions[currentQuestion].answers.a}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.a}" checked>
-//       <label for="${questions[currentQuestion].answers.a}"> ${questions[currentQuestion].answers.a}</label>
-//     </div>
-
-//     <div>
-//       <input id="${questions[currentQuestion].answers.b}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.b}">
-//       <label for="${questions[currentQuestion].answers.b}"> ${questions[currentQuestion].answers.b}</label>
-//     </div>
-
-//     <div>
-//       <input id="${questions[currentQuestion].answers.c}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.c}">
-//       <label for="${questions[currentQuestion].answers.c}"> ${questions[currentQuestion].answers.c}</label>
-//     </div>
-
-//     <div>
-//       <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
-//       <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
-//     </div>
-//     <button class="nextButton" id="nextButton" type="submit">Next Question </button>
-//   `);
-// }
