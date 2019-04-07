@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
   startQuiz();
+  $(".finishedQuiz").hide();
 
 });
 
@@ -132,10 +133,10 @@ function startQuiz() {
     event.preventDefault();
     $(".introWrapper").hide();
     $(".quizWrapper").show();
-
   });
 }
 
+function
 
 // var timer
 
