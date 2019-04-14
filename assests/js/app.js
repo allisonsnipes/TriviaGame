@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
 // global variables
 var currentQuestion = 0;
 var score = 0;
-var timer = 30;//set the number counter to 30
-var timerOn = false; //default to have the time on off
+var timeTotal;
+var timerClock;
 var introWrapper = document.getElementById("intro"); //introduction wrapepr
 var displayQs = document.getElementById("questionsQ"); //quiz wrapper
 const percentage = ((score/10) * 100);
@@ -133,6 +133,10 @@ function startQuiz() {
   $(".startButton").on("click", function(event) {
     event.preventDefault();
     console.log("start is working");
+    //timeTotal = 20;
+    //timerClock = setInterval(count, 1000);
+    $(".timeClock").text(timeTotal)
+
     $(".quizWrapper").show();
     $(".feedbackPartSelection").show();
     $(".quizLocation").html(`You are on question: ${currentQuestion +1}`).show();
@@ -165,6 +169,7 @@ function comparingAnswers() {
             calculatePercentage("You're final score is: "); //informs the user of their final score
             resetQuiz();
             exitQuiz();
+            //clearInterval(timeTotal);
         } else { //if else statement for the user to continue the quiz until the reach the last question
             if (choiceLetter === questions[currentQuestion].correctAnswer) {
                 $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
@@ -218,14 +223,14 @@ function resetQuiz() {
         event.preventDefault();
         score = 0; //resets the score to 0
         currentQuestion = 0; //restart the quiz question to 1
-
         $(".quizWrapper").show();
-        $(".feedbackPartSelection").show();
+        $(".feedbackPartSelection").hide();
         $(".quizLocation").html(`You are on question: ${currentQuestion +1}`).show();
-        $(".finishedQuiz").hide();
-        $(".introWrapper").hide();
-        generateQuestion();
+        $(".finishedQuiz").show();
+        $(".introWrapper").show();
     });
+    comparingAnswers();
+    generateQuestions();
 }
 
 function exitQuiz() { //exits the quiz on click
@@ -239,4 +244,19 @@ function calculatePercentage(percentageText) { //calculates the user's score
     const percentage = ((score / 10) * 100);
     $(".percentPart").text(`${percentageText} ${percentage} %`);
 }
-// var timer
+
+//i tried to make a timer but it kept breaking the project still working with tutor to get it working
+// // var timer set up
+// function makeTimer() {
+//     var timeTotal = 20;
+// }
+
+// //skip question when time is up
+// function skipTime() {
+//     setTimeout(function () {
+//         $(".quizWrapper").hide();
+//         calculatePercentage();
+//         $(".finishedQuiz").show();
+
+//     }, 4000); 
+// }
