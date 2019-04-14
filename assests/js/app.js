@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   console.log('loaded fine');
   startQuiz();
+  comparingAnswers();
   $(".finishedQuiz").hide();
   $(".quizWrapper").hide();
 
@@ -141,8 +142,51 @@ function startQuiz() {
   generateQuestions();
 }
 
+function comparingAnswers() {
+    $(".nextButton").on("click", function (event) {
+        event.preventDefault();
+        const choiceLetter = $(`input[name='quizchoices']:checked`).val();
+        const wrongAnswerText = `I'm sorry, that was the incorrect answer. The correct answer is: ${questions[currentQuestion].correctAnswer}`;
+        const rightAnswerText = "Good job! Right answer.";
+
+        if ((currentQuestion + 1) === questions.length) { //if the user gets to the last question stop the quiz
+            $(".finishedQuiz").show();
+            $(".wrapper").hide();
+            $(".quiz").hide();
+
+            if (choiceLetter === questions[currentQuestion].correctAnswer) { //code to generate next question if the user provides right answer
+                $(".rightFeebackPart").text(rightAnswerText).show();
+                $(".wrongFeebackPart").hide();
+                score++;
+            } else {
+                $(".wrongFeebackPart").show().text(wrongAnswerText); //code to let the user know they did not get the correct answer, and provide the correct answer
+                $(".rightFeebackPart").hide();
+            }
+            calculatePercentage("You're final score is: "); //informs the user of their final score
+            resetQuiz();
+            exitQuiz();
+        } else { //if else statement for the user to continue the quiz until the reach the last question
+            if (choiceLetter === questions[currentQuestion].correctAnswer) {
+                $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
+                $(".wrongFeebackPart").hide();
+                score++; //increase the users' score if the get the question right
+                currentQuestion++; //show the next question if the user gets the previous question correct
+            } else if ($(`input[name='quizchoices']:checked`).length <= 0) { //prevents the user from skipping the question without providing an answer choice
+                alert("Please make an answer selection."); //displays an error message to let the user know they have to select an answer before moving on
+            } else {
+                $(".wrongFeebackPart").show().text(wrongAnswerText); //informs the user that they selected the wrong answer and shows the correct answer instead
+                $(".rightFeebackPart").hide();
+                currentQuestion++; //moves on to the next question
+            }
+            calculatePercentage("You're current score is: "); //informs the user of their current score
+            $(".quizLocation").html(`You're on question: ${currentQuestion}`); //informs the user of their location in the quiz
+            generateQuestions();
+        }
+    });
+}
+
 function generateQuestions() { //generate questions
-  $(".showQuiz").html(`
+  $(".quizQuestions").html(`
     <legend>
       ${questions[currentQuestion].question}
     </legend>
@@ -166,53 +210,33 @@ function generateQuestions() { //generate questions
       <input id="${questions[currentQuestion].answers.d}" type="radio" name="quizchoices" value="${questions[currentQuestion].answers.d}">
       <label for="${questions[currentQuestion].answers.d}"> ${questions[currentQuestion].answers.d}</label>
     </div>
-    <button class="nextButton" id="nextButton" type="submit">Next Question
-    </button>
   `);
 }
 
-function comparingAnswers() {
-  $(".nextButton").on("click", function(event) {
-    event.preventDefault();
-    const choiceLetter = $(`input[name='quizchoices']:checked`).val();
-    const wrongAnswerText = `I'm sorry, that was the incorrect answer. The correct answer is: ${questions[currentQuestion].correctAnswer}`;
-    const rightAnswerText = "Good job! Right answer.";
+function resetQuiz() {
+    $(".resetButton").on("click", function(event) {
+        event.preventDefault();
+        score = 0; //resets the score to 0
+        currentQuestion = 0; //restart the quiz question to 1
 
-    if ((currentQuestion + 1) === questions.length) { //if the user gets to the last question stop the quiz
-        $(".finishedQuiz").show();
-        $(".wrapper").hide();
-        $(".quiz").hide();
-
-        if (choiceLetter === questions[currentQuestion].correctAnswer) {//code to generate next question if the user provides right answer
-            $(".rightFeebackPart").text(rightAnswerText).show();
-            $(".wrongFeebackPart").hide();
-            score++;
-        } else{
-            $(".wrongFeebackPart").show().text(wrongAnswerText);//code to let the user know they did not get the correct answer, and provide the correct answer
-            $(".rightFeebackPart").hide();
-        }
-        calculatePercentage("You're final score is: ");//informs the user of their final score
-        resetQuiz();
-        exitQuiz();
-    } else { //if else statement for the user to continue the quiz until the reach the last question
-        if (choiceLetter === questions[currentQuestion].correctAnswer) {
-            $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
-            $(".wrongFeebackPart").hide();
-            score++;//increase the users' score if the get the question right
-            currentQuestion++;//show the next question if the user gets the previous question correct
-        } else if ($(`input[name='quizchoices']:checked`).length <= 0) {//prevents the user from skipping the question without providing an answer choice
-            alert ("Please make an answer selection.");//displays an error message to let the user know they have to select an answer before moving on
-        } else {
-            $(".wrongFeebackPart").show().text(wrongAnswerText);//informs the user that they selected the wrong answer and shows the correct answer instead
-            $(".rightFeebackPart").hide();
-            currentQuestion++;//moves on to the next question
-        }
-        calculatePercentage("You're current score is: ");//informs the user of their current score
-        $(".quizLocation").html(`You're on question: ${currentQuestion}`);//informs the user of their location in the quiz
-        questionDisplay();
+        $(".quizWrapper").show();
+        $(".feedbackPartSelection").show();
+        $(".quizLocation").html(`You are on question: ${currentQuestion +1}`).show();
+        $(".finishedQuiz").hide();
+        $(".introWrapper").hide();
         generateQuestion();
-    }
-  });
+    });
 }
 
+function exitQuiz() { //exits the quiz on click
+    $(".exitButton").on("click", function (event) {
+        event.preventDefault();
+        window.location.href = "https://github.com/allisonsnipes";
+    });
+}
+
+function calculatePercentage(percentageText) { //calculates the user's score
+    const percentage = ((score / 10) * 100);
+    $(".percentPart").text(`${percentageText} ${percentage} %`);
+}
 // var timer
