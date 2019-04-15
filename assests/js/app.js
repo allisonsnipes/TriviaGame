@@ -245,8 +245,8 @@ function calculatePercentage(percentageText) { //calculates the user's score
     $(".percentPart").text(`${percentageText} ${percentage} %`);
 }
 
-//i tried to make a timer but it kept breaking the project still working with tutor to get it working
-// // var timer set up
+//i tried to make a timer but it kept breaking the whole project still working with tutor to get it working
+//  var timer set up should be 20 seconds that should restart with each question selection
 // function makeTimer() {
 //     var timeTotal = 20;
 // }
