@@ -164,9 +164,11 @@ function comparingAnswers() {
                 $(".rightFeebackPart").text(rightAnswerText).show();
                 $(".wrongFeebackPart").hide();
                 score++;
+                skipTime();
             } else {
                 $(".wrongFeebackPart").show().text(wrongAnswerText); //code to let the user know they did not get the correct answer, and provide the correct answer
                 $(".rightFeebackPart").hide();
+                skipTime();
             }
             calculatePercentage("You're final score is: "); //informs the user of their final score
             resetQuiz();
@@ -186,6 +188,7 @@ function comparingAnswers() {
                 $(".rightFeebackPart").hide();
                 currentQuestion++; //moves on to the next question
                 clearInterval(timeTotal);
+                skipTime();
             }
             calculatePercentage("You're current score is: "); //informs the user of their current score
             $(".quizLocation").html(`You're on question: ${currentQuestion}`); //informs the user of their location in the quiz
