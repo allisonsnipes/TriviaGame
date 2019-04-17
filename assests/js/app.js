@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
 var currentQuestion = 0;
 var score = 0;
 var timeTotal;
-var timerClock;
+var timer;
+var count;
 var introWrapper = document.getElementById("intro"); //introduction wrapepr
 var displayQs = document.getElementById("questionsQ"); //quiz wrapper
 const percentage = ((score/10) * 100);
@@ -133,10 +134,11 @@ function startQuiz() {
   $(".startButton").on("click", function(event) {
     event.preventDefault();
     console.log("start is working");
-    //timeTotal = 20;
-    //timerClock = setInterval(count, 1000);
-    $(".timeClock").text(timeTotal)
+    timeTotal = 20;
 
+    
+    $(".timer").text(timeTotal)
+    timer = setInterval(count, 1000);
     $(".quizWrapper").show();
     $(".feedbackPartSelection").show();
     $(".quizLocation").html(`You are on question: ${currentQuestion +1}`).show();
@@ -169,19 +171,21 @@ function comparingAnswers() {
             calculatePercentage("You're final score is: "); //informs the user of their final score
             resetQuiz();
             exitQuiz();
-            //clearInterval(timeTotal);
+            clearInterval(timeTotal);
         } else { //if else statement for the user to continue the quiz until the reach the last question
             if (choiceLetter === questions[currentQuestion].correctAnswer) {
                 $(".rightFeebackPart").text(rightAnswerText).show(); //generate next question if the user gets the question right
                 $(".wrongFeebackPart").hide();
                 score++; //increase the users' score if the get the question right
                 currentQuestion++; //show the next question if the user gets the previous question correct
+                clearInterval(timeTotal);
             } else if ($(`input[name='quizchoices']:checked`).length <= 0) { //prevents the user from skipping the question without providing an answer choice
                 alert("Please make an answer selection."); //displays an error message to let the user know they have to select an answer before moving on
             } else {
                 $(".wrongFeebackPart").show().text(wrongAnswerText); //informs the user that they selected the wrong answer and shows the correct answer instead
                 $(".rightFeebackPart").hide();
                 currentQuestion++; //moves on to the next question
+                clearInterval(timeTotal);
             }
             calculatePercentage("You're current score is: "); //informs the user of their current score
             $(".quizLocation").html(`You're on question: ${currentQuestion}`); //informs the user of their location in the quiz
@@ -247,16 +251,16 @@ function calculatePercentage(percentageText) { //calculates the user's score
 
 //i tried to make a timer but it kept breaking the whole project still working with tutor to get it working
 //  var timer set up should be 20 seconds that should restart with each question selection
-// function makeTimer() {
-//     var timeTotal = 20;
-// }
 
 // //skip question when time is up
-// function skipTime() {
-//     setTimeout(function () {
-//         $(".quizWrapper").hide();
-//         calculatePercentage();
-//         $(".finishedQuiz").show();
-
-//     }, 4000); 
-// }
+function skipTime() {
+    setTimeout(function () {
+        if ((currentQuestion + 1) < questions.length) {
+            currentQuestion++;
+        } else {
+            $(".quizWrapper").hide();
+            calculatePercentage();
+            $(".finishedQuiz").show();
+        }
+    }, 4000); 
+}
