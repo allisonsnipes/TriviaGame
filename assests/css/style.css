@@ -7,16 +7,20 @@ body {
 background-color: #0abab5;
 }
 
-.top {
-  margin-top: 3em;
-}
-
-.introWrapper {
-  margin-top: 5em;
-}
-
 .hide {
   display: none;
+}
+
+a {
+  padding: 1em;
+  margin: auto;
+  display: inline;
+  float: left;
+  color: black;
+}
+
+li {
+  list-style-type: none;
 }
 
 #questions[currentQuestion].answers:checked {
