@@ -2,7 +2,7 @@
 
 ## Overview & Description
 
-This is a simple trivia game created with bootstrap, javascript, HTML, and CSS. This is to demonstrate and share knowledge on press and activists' rights.
+This is a simple trivia game created with bootstrap, vanilla javascript, HTML, and CSS. This is to demonstrate and share knowledge on press and activists' rights.
 
 ## Requirements
 
