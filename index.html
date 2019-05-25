@@ -55,7 +55,7 @@
 
       <!-- actuall quiz questions populate here-->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="quizWrapper">
             <form class="showQuiz">
               <fieldset class="quizQuestions"></fieldset>
@@ -65,48 +65,46 @@
         </div>
       </div>
 
-      <!-- feedback for ans-->
+      <!-- feedback for ans and display location and quiz percentage-->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+          <!-- feedback -->
           <div class="feedbackPartSelection">
-          <div class="feedback"> 
             <div class="rightFeebackPart">
               <p class="rightFeeback"></p>
             </div>
+
             <div class="wrongFeebackPart">
               <p class="wrongFeeback"></p>
             </div>
           </div>
+
+          <!--quiz question location -->
+          <div class="location"></div>
+
+          <!-- quiz percentage -->
+          <div class="percentage"></div>
         </div>
       </div>
-    </div>
-
-    <div class="locationPercent">
-      <div class="quizLocation"><!--quiz question location -->
-        <p class="percentPart"></p>
-      </div>
-    </div>
-
-    <div class="clock">
+      
+      <!-- clock functionality -->
       <div class="row">
-        <div class="col-6">
-          <div class="timeClock" id="timer">
-
-          </div>
+        <div class="col-md-4">
+          <div class="timeClock" id="timer"></div>
         </div>
       </div>
-    </div>
-
-    <div class="finishedQuiz" id="finishedSection">
+      
+      <!-- end of quiz -->
       <div class="row">
-        <div class="col-6">
-          <div class="finished">
-            <p>
-              Thank you for taking my quiz! You have come to this window because you have either run out of time, or you have finished the quiz! You may choose to either retake the quiz or quit.
-            </p>
+        <div class="col-md-4">
+          <div class="finishedQuiz">
+            <div class="finished">
+              <p>
+                Thank you for taking my quiz! You have come to this window because you have either run out of time, or you have finished the quiz! You may choose to either retake the quiz or quit.
+              </p>
+            </div>
             <button class="resetButton" id="resetButton" type="button">Restart Quiz</button>
             <button class="exitButton" id="exitButton" type="button">Exit Quiz</button>
-          </div>
         </div>
       </div>
     </div>
